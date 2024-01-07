@@ -130,6 +130,11 @@ where salary>600000
 group by d.d_no having count(*) >1;
 
 
+-- OR --
+select d.d_no, count(*)
+from Department d , Employee e  
+where e.d_no=d.d_no and e.salary>600000 
+group by d.d_no having count(*) >1;
 
 
 -- Create a view that shows project name, location and dept.
