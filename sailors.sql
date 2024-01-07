@@ -102,6 +102,7 @@ order by age desc limit 1;
 
 
 -- For each boat which was reserved by at least 5 sailors with age >= 40, find the boat id and the average age of such sailors.
+-- but here 2 instead of 5 sailors
 select b.bid, avg(s.age) as average_age  
 from sailors s, boat b, reserves r
 where r.sid=s.sid and r.bid=b.bid and s.age>=40
@@ -118,6 +119,17 @@ WHERE s.rating=10;
 
 select * from specific_rating;
 
+-- OR--
+
+create view display as
+select distinct b.bname,b.color
+from boat b,sailors s,reserves r
+where b.bid=r.bid and s.sid=r.sid and s.rating=10;
+
+select * from display;
+
+
+
 -- Trigger that prevents boats from being deleted if they have active reservation
 
 DELIMITER //
@@ -131,6 +143,7 @@ BEGIN
 END;//
 
 DELIMITER ;
+
 
 DELETE FROM boat
 WHERE bid =103;
